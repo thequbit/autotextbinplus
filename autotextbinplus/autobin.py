@@ -9,6 +9,8 @@ import re
 
 from sklearn.feature_extraction.text import CountVectorizer
 
+import glob
+
 def clean_text(text, language='english'):
 
     # only return upper and lower-case letters, and 
@@ -39,12 +41,12 @@ def build_bag_of_words(clean_text, build_dist=False):
     )
 
     # perform the transform
-    data_features = vectorizer.fit_transform(clean_text).toarray()
+    data_features = vectorizer.fit_transform(clean_text) #.toarray()
 
     dist = None
     if build_dist == True:
        dist = []
-       _d = np.sum(data_features, axis=0)
+       _d = np.sum(data_features.toarray(), axis=0)
        vocab = vectorizer.get_feature_names()
        for tag, count in zip(vocab, _d):
            dist.append((count, tag))
@@ -55,31 +57,21 @@ def autobin(texts):
     
     clean_texts = []
     for text in texts:
-
         ct = clean_text(text)
-        
-        print "Text:"
-        print text
-        print ct
-        print ''
-
         clean_texts.append(ct)
 
     bow, dist = build_bag_of_words(clean_texts, build_dist=True)
 
-    print "\nBag of Words:"
-    print bow
-
-    print "\nDistribution of Words:"
-    print dist
+    return bow, dist
 
 if __name__ == '__main__':
 
-    texts = [
-        "Never have I found a man as dedicated to such a worthless cause as much as self doubt.",
-        "How perfect must a day be to classify as the MOST perfect.",
-        "I like turtles.",
-    ]
+    doc_files = glob.glob('*.txt')
 
-    autobin(texts)
+    texts = []
+    for doc_file in doc_files:
+        with open(doc_file,'r') as f:
+            texts.append(f.read())
+
+    print autobin(texts)
 

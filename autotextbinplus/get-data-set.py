@@ -74,8 +74,8 @@ class DocGrabber(object):
 
 if __name__ == '__main__':
 
-    #url = 'http://henrietta.org/index.php/2012-05-16-11-50-52/town-board/agendas-minutes/2015-agenda-minutes-1'
-    url = 'http://timduffy.me/'
+    url = 'http://henrietta.org/index.php/2012-05-16-11-50-52/town-board/agendas-minutes/2015-agenda-minutes-1'
+    #url = 'http://timduffy.me/'
 
     dg = DocGrabber()
     dg.scrape(url, level=1)
