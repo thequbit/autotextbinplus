@@ -38,7 +38,7 @@ class DocGrabber(object):
         #    SCRUB = False,
         #    verbose = True,
         #)
-        call(['pdftotext','{0}doc.pdf'.format(self.prefix),'doc-{0}.txt'.format(self.doc_count)])
+        call(['pdftotext','doc.pdf','./data/{0}doc-{1}.txt'.format(self.prefix, self.doc_count)])
         #if success == False:
         #    raise Exception('invalid pdf')
         #with open('doc-{0}.txt'.format(self.do_count),'w') as f:
@@ -76,11 +76,20 @@ class DocGrabber(object):
 
 if __name__ == '__main__':
 
+    ''' # henrietta
     urls = [
         ('tb-', 'http://henrietta.org/index.php/2012-05-16-11-50-52/town-board/agendas-minutes/2014-agenda-a-minutes-2'),
         ('zb-', 'http://henrietta.org/index.php/2012-05-16-11-50-52/2012-05-16-12-27-7/agendas-minutes/zoning-board-2014'),
         ('cb-', 'http://henrietta.org/index.php/2012-05-16-11-50-52/2012-05-16-12-27-8/agendas-minutes/2014-agenda-a-minutes'),
-    ]   
+    ]
+    '''
+
+    urls = [
+        ('tb-', 'http://www.townofbrighton.org/Archive.aspx?AMID=85'), # town board
+        ('pb-', 'http://www.townofbrighton.org/Archive.aspx?AMID=69'), # zoning board
+        ('ps-', 'http://www.townofbrighton.org/Archive.aspx?AMID=72'), # public safety board
+        ('hp-', 'http://www.townofbrighton.org/Archive.aspx?AMID=89'), # historic preservation board
+    ]
 
     for prefix,url in urls:
         dg = DocGrabber()
