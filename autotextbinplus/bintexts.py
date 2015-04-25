@@ -94,6 +94,8 @@ def predict(count_vect, tfidf_trans, classifier, text):
 
 if __name__ == '__main__':
 
+    interest_size = 2048
+
     # get doc files
     doc_files = glob.glob('./data/*.txt')
 
@@ -110,7 +112,7 @@ if __name__ == '__main__':
             for cat in doc_prefixes:
                 if cat in doc_file:
                     print 'file: {0}, cat: {1}, index: {2}'.format(doc_file, cat, doc_prefixes.index(cat))
-                    texts.append(f.read()[:1024])
+                    texts.append(f.read()[:interest_size])
                     categories.append(doc_prefixes.index(cat))
                     break
 
@@ -125,7 +127,7 @@ if __name__ == '__main__':
         with open('./data/ps-doc-2.txt') as f:
             for cat in doc_prefixes:
                 if cat in doc_file:
-                    text = f.read()[:1024]
+                    text = f.read()[:interest_size]
                     cat_val = doc_prefixes.index(cat)
      
                     # perform prediction
