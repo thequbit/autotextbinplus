@@ -94,16 +94,17 @@ def predict(count_vect, tfidf_trans, classifier, text):
 
 if __name__ == '__main__':
 
-    interest_size = 2048
+    directory = 'henrietta'
+    interest_size = 1024
 
     # get doc files
-    doc_files = glob.glob('./data/*.txt')
+    doc_files = glob.glob('./{0}/*.txt'.format(directory))
 
     #
     # define our prefixes for our different doc categories
-    #                0    1     2     3
+    #                0    1     2 
     #
-    doc_prefixes = ['tb','pb', 'ps', 'hp']
+    doc_prefixes = ['tb','cb', 'zb']
 
     texts = []
     categories = []
@@ -124,7 +125,7 @@ if __name__ == '__main__':
 
     correct_count = 0
     for doc_file in doc_files:
-        with open('./data/ps-doc-2.txt') as f:
+        with open(doc_file) as f:
             for cat in doc_prefixes:
                 if cat in doc_file:
                     text = f.read()[:interest_size]
